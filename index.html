@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Body Cost Calculator</title>
+    <meta charset="utf-8"/>
+    <link type="text/css" rel="stylesheet" href="styles/styles.css"/>
+
+    <script src="script/bodyCostCalcualtor.js" type="text/javascript"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Viga" rel="stylesheet"/>
+    <!--<link rel="shortcut icon" type="image/png" href="images/favicon.png"/>-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+
+<div id="mainContentContainer">
+    <div class="centre">
+        <h1>
+            Body Cost Calculator
+        </h1>
+        <h2>Cost:
+            <span id="bodyCostDiv">0</span>
+        </h2>
+
+        <h3 id="bodyComponentCount">(0/50)</h3>
+
+        <div id="progress-bar">
+            <div id="progress"></div>
+        </div>
+
+        <div>
+            <button class="bodyComponentButton" value="50">MOVE</button>
+            <button class="bodyComponentButton" value="100">WORK</button>
+            <button class="bodyComponentButton" value="50">CARRY</button>
+            <button class="bodyComponentButton" value="80">ATTACK</button>
+            <button class="bodyComponentButton" value="150">RANGED_ATTACK</button>
+            <button class="bodyComponentButton" value="250">HEAL</button>
+            <button class="bodyComponentButton" value="600">CLAIM</button>
+            <button class="bodyComponentButton" value="10">TOUGH</button>
+            <button id="clearButton" title="Clear body components"><i class="material-icons">clear</i></button>
+        </div>
+    </div>
+    <hr/>
+    <table id="componentCountTable">
+        <tr id="moveComponentCountRow">
+            <td>MOVE</td>
+            <td id="moveComponentCountCell" class="componentCountCell">0</td>
+        </tr>
+        <tr id="workComponentCountRow">
+            <td>WORK</td>
+            <td id="workComponentCountCell" class="componentCountCell">0</td>
+        </tr>
+        <tr id="carryComponentCountRow">
+            <td>CARRY</td>
+            <td id="carryComponentCountCell" class="componentCountCell">0</td>
+        </tr>
+        <tr id="attackComponentCountRow">
+            <td>ATTACK</td>
+            <td id="attackComponentCountCell" class="componentCountCell">0</td>
+        </tr>
+        <tr id="rangedAttackComponentCountRow">
+            <td>RANGED_ATTACK</td>
+            <td id="ranged_attackComponentCountCell" class="componentCountCell">0</td>
+        </tr>
+        <tr id="healComponentCountRow">
+            <td>HEAL</td>
+            <td id="healComponentCountCell" class="componentCountCell">0</td>
+        </tr>
+        <tr id="claimComponentCountRow">
+            <td>CLAIM</td>
+            <td id="claimComponentCountCell" class="componentCountCell">0</td>
+        </tr>
+        <tr id="toughComponentCountRow">
+            <td>TOUGH</td>
+            <td id="toughComponentCountCell" class="componentCountCell">0</td>
+        </tr>
+    </table>
+    <button title="Copy the body string to the clipboard" id="copyBodyButton">Copy Body</button>
+    <div class="addedComponentsDiv" id="addedComponentsDiv"></div>
+    <div id="bodyRecipeArray"></div>
+</div>
+</body>
+
+</html>

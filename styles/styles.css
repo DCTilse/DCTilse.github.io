@@ -1,0 +1,137 @@
+body {
+    background-color: rgb(3, 164, 244);
+    font-family: 'Viga', sans-serif;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(173, 173, 173);
+}
+
+/* -- CLASSES --*/
+
+.bodyComponentButton {
+    background-color: rgb(221, 221, 221);
+    border-radius: 10px;
+    padding: 10px;
+    border: none;
+    outline: none;
+    transition: 0.5s ease background-color;
+    user-select: none;
+}
+
+.centre {
+    text-align: center;
+}
+
+.addedComponent {
+    padding: 10px;
+    background-color: rgb(172, 172, 172);
+    cursor: pointer;
+    user-select: none;
+    margin: 3px;
+    border-radius: 15px;
+    border-style: none;
+}
+
+.move {
+    color: rgb(0, 238, 255);
+}
+
+.work {
+    color: rgb(155, 155, 0);
+}
+
+.carry {
+    color: grey;
+}
+
+.attack {
+    color: rgb(167, 0, 0);
+}
+
+.ranged_attack {
+    color: rgb(32, 32, 194);
+}
+
+.heal {
+    color: rgb(6, 107, 6);
+}
+
+.claim {
+    color: violet;
+}
+
+.tough {
+    color: rgb(0, 0, 0);
+}
+
+/* -- IDS --*/
+#mainContentContainer {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    width: 1200px;
+    margin: auto;
+
+}
+
+#clearButton {
+    outline: none;
+    cursor: pointer;
+    padding: 15px;
+    border: none;
+}
+
+#addedComponentsDiv {
+    margin: 10px;
+}
+
+#progress-bar {
+    width: 50%;
+    min-width: 500px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    height: 30px;
+    margin: 10px auto;
+    overflow: hidden;
+
+}
+
+#progress {
+    background: orange;
+    height: 100%;
+    width: 0;
+    -webkit-border-radius: inherit;
+    -moz-border-radius: inherit;
+    border-radius: inherit;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    color: white;
+
+}
+
+/* Order matters here!*/
+button:link {
+
+}
+
+button:visited {
+
+}
+
+button:hover {
+    background: rgb(194, 194, 194);
+}
+
+button:active {
+
+}
