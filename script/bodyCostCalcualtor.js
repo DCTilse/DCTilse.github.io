@@ -156,7 +156,7 @@
             });
 
             for (let e in count) {
-                document.getElementById(`${e.toLowerCase()}ComponentCountCell`).innerText = count[e]
+                document.getElementById(`${e.toLowerCase()}ComponentCountCell`).innerText = count[e];
             }
         }
 
@@ -190,14 +190,11 @@
             }
 
             let pattern = [...bodyArray];
-            console.log(pattern);
             let i = Math.floor(50 / bodyArray.length);
 
             for (; i > 1; i--) {
                 bodyArray.push(...pattern);
             }
-
-            console.log(bodyArray);
 
             update();
         }
