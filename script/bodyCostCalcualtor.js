@@ -70,6 +70,7 @@
             updateAddedComponentDisplay();
             updateBodyStringDisplay();
             updateComponentCountDisplay();
+            updateComponentCountTable();
             updateProgressBar();
         }
 
@@ -134,8 +135,28 @@
             recipeDiv.innerHTML = bodyString;
         }
 
-        function updateComponentCountTable () {
+        /**
+         * Update the table that shows counts of added components
+         * */
+        function updateComponentCountTable() {
+            let count = {
+                MOVE: 0,
+                WORK: 0,
+                CARRY: 0,
+                ATTACK: 0,
+                RANGED_ATTACK: 0,
+                HEAL: 0,
+                CLAIM: 0,
+                TOUGH: 0
+            };
 
+            bodyArray.forEach(value => {
+                count[value]++;
+            });
+
+            for (let e in count) {
+                document.getElementById(`${e.toLowerCase()}ComponentCountCell`).innerText = count[e]
+            }
         }
 
         /**
