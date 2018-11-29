@@ -24,6 +24,7 @@
             }
             document.getElementById("clearButton").addEventListener("click", clearComponents);
             document.getElementById("addedComponentsDiv").addEventListener("click", removeBodyComponent);
+            document.getElementById("fill-button").addEventListener("click", fillBody);
         }
 
         /***
@@ -171,6 +172,34 @@
             } else {
                 progressBar.innerText = "";
             }
+        }
+
+        /**
+         * Copy the array string of added components
+         * */
+        function copyBody() {
+
+        }
+
+        /**
+         * Add copies of currently added components until the body is full.
+         * */
+        function fillBody() {
+            if (bodyArray.length > 25) {
+                return;
+            }
+
+            let pattern = [...bodyArray];
+            console.log(pattern);
+            let i = Math.floor(50 / bodyArray.length);
+
+            for (; i > 1; i--) {
+                bodyArray.push(...pattern);
+            }
+
+            console.log(bodyArray);
+
+            update();
         }
     }
 }());
