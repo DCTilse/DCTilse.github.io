@@ -7,11 +7,22 @@ tr:nth-child(even) {
     background-color: rgb(173, 173, 173);
 }
 
+button {
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+    border: none;
+}
+
+i {
+    vertical-align: middle;
+}
+
 /* -- CLASSES --*/
 
-.bodyComponentButton {
-    background-color: rgb(221, 221, 221);
-    border-radius: 10px;
+.addBodyComponentButton {
+    background-color: #333;
+    border-radius: 5px;
     padding: 10px;
     border: none;
     outline: none;
@@ -25,44 +36,56 @@ tr:nth-child(even) {
 
 .addedComponent {
     padding: 10px;
-    background-color: rgb(172, 172, 172);
+    background-color: #333;
     cursor: pointer;
     user-select: none;
     margin: 3px;
-    border-radius: 15px;
+    border-radius: 5px;
     border-style: none;
 }
 
 .move {
-    color: rgb(0, 238, 255);
+    color: #a9b7c6;
 }
 
 .work {
-    color: rgb(155, 155, 0);
+    color: #ffe56d;
 }
 
 .carry {
-    color: grey;
+    color: #777;
 }
 
 .attack {
-    color: rgb(167, 0, 0);
+    color: #f93842;
 }
 
 .ranged_attack {
-    color: rgb(32, 32, 194);
+    color: #5d80b2;
 }
 
 .heal {
-    color: rgb(6, 107, 6);
+    color: #65fd62;
 }
 
 .claim {
-    color: violet;
+    color: #b99cfb;
 }
 
 .tough {
-    color: rgb(0, 0, 0);
+    color: #fff;
+}
+
+.additional-functionality-buttons {
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 40px;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    vertical-align: middle;
+
 }
 
 /* -- IDS --*/
@@ -73,13 +96,6 @@ tr:nth-child(even) {
     width: 1200px;
     margin: auto;
 
-}
-
-#clearButton {
-    outline: none;
-    cursor: pointer;
-    padding: 15px;
-    border: none;
 }
 
 #addedComponentsDiv {

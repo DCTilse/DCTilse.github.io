@@ -1,157 +1,155 @@
 (function () {
-
     document.onreadystatechange = function () {
-        const addedComponentsDiv = document.getElementById("addedComponentsDiv");
-        const bodyCostDiv = document.getElementById("bodyCostDiv");
-        var bodyRecipeArray = [];
-        var componentCount = {
-            move: 0,
-            work: 0,
-            carry: 0,
-            attack: 0,
-            ranged_attack: 0,
-            heal: 0,
-            claim: 0,
-            tough: 0
+        const bodyArray = [];
+        const bodyCosts = {
+            move: 50,
+            work: 100,
+            carry: 50,
+            attack: 80,
+            ranged_attack: 150,
+            heal: 250,
+            claim: 600,
+            tough: 10
+
         };
-        const bodyComponentCount = document.getElementById("bodyComponentCount");
 
         if (document.readyState === "complete") {
-            let bodyButtons = document.getElementsByClassName("bodyComponentButton");
+            addEventListeners();
+        }
 
+        function addEventListeners() {
+            let bodyButtons = document.getElementsByClassName("addBodyComponentButton");
             for (let i = 0; i < bodyButtons.length; i++) {
-                bodyButtons[i].addEventListener("click", bodyButtonEventListener);
+                bodyButtons[i].addEventListener("click", addBodyComponent);
             }
-
-            document.getElementById("copyBodyButton").addEventListener("click", copyBodyStringButtonListener);
-            document.getElementById("addedComponentsDiv").addEventListener("click", addedComponentsEventListener);
-            document.getElementById("clearButton").addEventListener("click", clearButtonEventListener);
-
+            document.getElementById("clearButton").addEventListener("click", clearComponents);
+            document.getElementById("addedComponentsDiv").addEventListener("click", removeBodyComponent);
         }
 
-        function bodyButtonEventListener(e) {
-            if (bodyRecipeArray.length >= 50) {
-                return;
-
-            }
-            let value = e.target.value;
-            let total = Number(bodyCostDiv.innerText);
-
-            addedComponentsDiv.innerHTML += "<button class='addedComponent " + e.target.innerText.toLowerCase() + " ' value='" + value + "'>" + e.target.innerText + "</button> ";
-
-            total += Number(value);
-            bodyCostDiv.innerText = total;
-            componentCount[e.target.innerText.toLowerCase()]++;
-            generateComponentArrayString();
-            updateComponentCountTable();
-        }
-
-        function addedComponentsEventListener(e) {
-            // if the div is clicked, don't break
-            if (e.target === this) {
+        /***
+         * Action executed when an "addBodyComponentButton" is pressed
+         * @param e event object
+         */
+        function addBodyComponent(e) {
+            if (bodyArray.length >= 50) {
                 return;
             }
 
-            let value = e.target.value;
-            let total = Number(bodyCostDiv.innerText);
+            bodyArray.push(e.target.innerText);
+            update();
+        }
 
-            total -= Number(value);
-            bodyCostDiv.innerText = total;
+        /***
+         * Event triggered when an added component button is clicked
+         * @param e event object
+         */
+        function removeBodyComponent(e) {
+            if (e.target.id === "addedComponentsDiv") {
+                return;
+            }
+            bodyArray.splice(e.target.value, 1);
+            update();
+        }
 
-            this.removeChild(e.target);
-            componentCount[e.target.innerText.toLowerCase()]--;
-
-            generateComponentArrayString();
-            updateComponentCountTable();
+        /**
+         * Clear components button event
+         * @param e event object
+         * */
+        function clearComponents(e) {
+            bodyArray.splice(0, bodyArray.length);
+            update();
 
         }
 
-        function clearButtonEventListener() {
-            bodyCostDiv.innerText = 0;
-            addedComponentsDiv.innerHTML = "";
-            bodyRecipeArray = [];
-            generateComponentArrayString();
-            updateRecipeArray();
-            resetComponentCountObject();
-            updateComponentCountTable();
-        }
-
-        function updateRecipeArray() {
-            bodyRecipeArray = document.getElementsByClassName("addedComponent");
+        /***
+         * Top-level function that calls all functions needed to completely update the display when the number
+         * of added components changes
+         */
+        function update() {
+            updateBodyCostDisplay();
+            updateAddedComponentDisplay();
+            updateBodyStringDisplay();
             updateComponentCountDisplay();
-
-        }
-
-        function updateComponentCountDisplay() {
-            bodyComponentCount.innerText = "(" + bodyRecipeArray.length + "/50)";
             updateProgressBar();
         }
 
-        function generateComponentArrayString() {
+        /***
+         * Updates the body cost numerical display
+         */
+        function updateBodyCostDisplay() {
+            document.getElementById("bodyCostDiv").innerText = String(calculateBodyCost());
+        }
+
+        /***
+         * Calculate the cost of the body based on the components in the bodyArray
+         * @return {number} - the sum of all body components added by the user
+         */
+        function calculateBodyCost() {
+            let total = 0;
+            bodyArray.forEach((value) => {
+                total += bodyCosts[value.toLowerCase()];
+            });
+
+            return total;
+        }
+
+        /***
+         * Update the display of clickable body components
+         */
+        function updateAddedComponentDisplay() {
+            let addedComponentsDiv = document.getElementById("addedComponentsDiv");
+            let componentString = "";
+
+            bodyArray.forEach((v, i) => {
+                componentString += `<button class='addedComponent ${v.toLowerCase()}' value="${i}">${v}</button>`;
+            });
+
+            addedComponentsDiv.innerHTML = componentString;
+        }
+
+        function updateComponentCountDisplay() {
+            document.getElementById("bodyComponentCount").innerText = `(${bodyArray.length}/50)`;
+        }
+
+        /***
+         * Update the text display that shows the array representation of components in the interface
+         */
+        function updateBodyStringDisplay() {
             let recipeDiv = document.getElementById("bodyRecipeArray");
-            let components = document.getElementsByClassName("addedComponent");
-            if (components.length === 0) {
-                recipeDiv.innerHTML = "";
+            if (bodyArray.length === 0) {
+                recipeDiv.innerText = "";
                 return;
             }
-            recipeDiv.innerHTML = "[";
-            for (let i = 0; i < components.length; i++) {
+
+            let bodyString = "[";
+            bodyArray.forEach((v, i) => {
                 if (i !== 0) {
-                    recipeDiv.innerHTML += ", ";
-
+                    bodyString += ", ";
                 }
+                bodyString += `<span class="${v.toLowerCase()}">${v}</span>`;
+            });
 
-                recipeDiv.innerHTML += "<span class='" + components[i].innerHTML.toLowerCase() + "'>" + components[i].innerHTML + "</span>";
+            bodyString += "]";
 
-            }
-            recipeDiv.innerHTML += "]";
-
-            updateRecipeArray();
+            recipeDiv.innerHTML = bodyString;
         }
 
-        function updateComponentCountTable() {
-
-            for (let x in componentCount) {
-                document.getElementById(x + "ComponentCountCell").innerText = componentCount[x];
-            }
+        function updateComponentCountTable () {
 
         }
 
-        function copyBodyStringButtonListener(e) {
-            let recipeDiv = document.getElementById("bodyRecipeArray");
-
-            if (bodyRecipeArray.length < 1) {
-                console.log("Not copied");
-                return;
-            }
-            let inp = document.createElement("input");
-            inp.value = recipeDiv.innerText;
-
-            document.getElementsByTagName("body")[0].appendChild(inp);
-
-            inp.select();
-            document.execCommand("Copy");
-
-            document.getElementsByTagName("body")[0].removeChild(inp);
-        }
-
-        function resetComponentCountObject() {
-            for (let x in componentCount) {
-                componentCount[x] = 0;
-            }
-        }
-
+        /**
+         * Update the progress bar
+         * */
         function updateProgressBar() {
-            let progress = document.getElementById("progress");
-            let percent = bodyRecipeArray.length * 2;
-            progress.style.width = percent + "%";
-
+            let progressBar = document.getElementById("progress");
+            let percent = bodyArray.length * 2;
+            progressBar.style.width = percent + "%";
             if (percent > 5) {
-                progress.innerText = percent + "%";
+                progressBar.innerText = `${percent}%`;
             } else {
-                progress.innerText = "";
+                progressBar.innerText = "";
             }
         }
     }
-
 }());
