@@ -25,6 +25,7 @@
             document.getElementById("clearButton").addEventListener("click", clearComponents);
             document.getElementById("addedComponentsDiv").addEventListener("click", removeBodyComponent);
             document.getElementById("fill-button").addEventListener("click", fillBody);
+            document.getElementById("copyBodyButton").addEventListener("click", copyBody);
         }
 
         /***
@@ -175,9 +176,29 @@
         }
 
         /**
-         * Copy the array string of added components
+         * Copy the array string of added components to the clipboard
          * */
-        function copyBody() {
+        function copyBody(e) {
+
+            let recipeDiv = document.getElementById("bodyRecipeArray");
+
+            if (bodyArray.length < 1) {
+                e.target.style.background = "red";
+                setTimeout(() => {
+                    e.target.style.background = "white";
+                    },
+                    500);
+                return;
+            }
+            let inp = document.createElement("input");
+            inp.value = recipeDiv.innerText;
+
+            document.getElementsByTagName("body")[0].appendChild(inp);
+
+            inp.select();
+            document.execCommand("Copy");
+
+            document.getElementsByTagName("body")[0].removeChild(inp);
 
         }
 
@@ -185,7 +206,8 @@
          * Add copies of currently added components until the body is full.
          * */
         function fillBody() {
-            if (bodyArray.length > 25) {
+            if (bodyArray.length === 0 || bodyArray.length > 25) {
+
                 return;
             }
 
