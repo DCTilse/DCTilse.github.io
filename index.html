@@ -14,12 +14,13 @@
 </head>
 
 <body>
-
+<h1>
+    Body Cost Calculator
+</h1>
 <div id="mainContentContainer">
+
     <div class="centre">
-        <h1>
-            Body Cost Calculator
-        </h1>
+
         <h2>Cost:
             <span id="bodyCostDiv">0</span>
         </h2>
@@ -41,7 +42,8 @@
             <button class="addBodyComponentButton tough" value="10">TOUGH</button>
             <button class="additional-functionality-buttons" id="clearButton" title="Clear body components"><i
                     class="material-icons">clear</i></button>
-            <button class="additional-functionality-buttons" id="fill-button"><i class="material-icons">control_point_duplicate</i>
+            <button class="additional-functionality-buttons" id="fill-button"
+                    title="Fill the body with copies of added components"><i class="material-icons">control_point_duplicate</i>
             </button>
         </div>
     </div>
@@ -80,7 +82,11 @@
             <td id="toughComponentCountCell" class="componentCountCell">0</td>
         </tr>
     </table>
-    <button title="Copy the body string to the clipboard" id="copyBodyButton">Copy Body</button>
+
+    <div id="copyBodyContainer">
+        <button title="Copy the body string to the clipboard" id="copyBodyButton">Copy Body</button>
+    </div>
+
     <div class="addedComponentsDiv" id="addedComponentsDiv"></div>
     <div id="bodyRecipeArray"></div>
 </div>

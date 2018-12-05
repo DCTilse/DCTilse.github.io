@@ -3,6 +3,11 @@ body {
     font-family: 'Viga', sans-serif;
 }
 
+h1 {
+
+    margin: 0;
+}
+
 tr:nth-child(even) {
     background-color: rgb(173, 173, 173);
 }
@@ -12,9 +17,11 @@ button {
     user-select: none;
     outline: none;
     border: none;
+    transition: all 0.5s ease;
 }
 
 i {
+    transition: all 0.5s ease;
     vertical-align: middle;
 }
 
@@ -26,8 +33,11 @@ i {
     padding: 10px;
     border: none;
     outline: none;
-    transition: 0.5s ease background-color;
     user-select: none;
+}
+
+.addBodyComponentButton:hover {
+    margin-bottom: 2px;
 }
 
 .centre {
@@ -88,6 +98,10 @@ i {
 
 }
 
+.successful {
+    color: #3ccb5c;
+}
+
 /* -- IDS --*/
 #mainContentContainer {
     background-color: white;
@@ -100,6 +114,14 @@ i {
 
 #addedComponentsDiv {
     margin: 10px;
+}
+
+#copyBodyButton {
+    padding: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
 }
 
 #progress-bar {
@@ -146,6 +168,7 @@ button:visited {
 
 button:hover {
     background: rgb(194, 194, 194);
+
 }
 
 button:active {

@@ -179,13 +179,15 @@
          * Copy the array string of added components to the clipboard
          * */
         function copyBody(e) {
-
+            if (document.getElementById("copy-success-tick") !== null) {
+                return;
+            }
             let recipeDiv = document.getElementById("bodyRecipeArray");
 
             if (bodyArray.length < 1) {
                 e.target.style.background = "red";
                 setTimeout(() => {
-                    e.target.style.background = "white";
+                        e.target.style.background = "white";
                     },
                     500);
                 return;
@@ -199,6 +201,23 @@
             document.execCommand("Copy");
 
             document.getElementsByTagName("body")[0].removeChild(inp);
+            let tick = document.createElement("i");
+            let container = document.getElementById("copyBodyContainer");
+            tick.innerText = "done";
+            tick.classList = "material-icons successful";
+            tick.id = "copy-success-tick";
+
+            container.appendChild(tick);
+            e.target.style.background = "#3ccb5c";
+
+            setTimeout(() => {
+                tick.style.color = "transparent";
+                e.target.style.background = "white";
+            }, 500);
+
+            setTimeout(() => {
+                container.removeChild(tick);
+            }, 1000);
 
         }
 
