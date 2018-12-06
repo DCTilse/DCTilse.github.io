@@ -17,34 +17,42 @@
 <h1>
     Body Cost Calculator
 </h1>
+<div id="left-side-bar" class="centre">
+    <canvas id="body-percent-display"></canvas>
+    <button class="addBodyComponentButton move" value="50">MOVE</button>
+    <button class="addBodyComponentButton work" value="100">WORK</button>
+    <button class="addBodyComponentButton carry" value="50">CARRY</button>
+    <button class="addBodyComponentButton attack" value="80">ATTACK</button>
+    <button class="addBodyComponentButton ranged_attack" value="150">RANGED_ATTACK</button>
+    <button class="addBodyComponentButton heal" value="250">HEAL</button>
+    <button class="addBodyComponentButton claim" value="600">CLAIM</button>
+    <button class="addBodyComponentButton tough" value="10">TOUGH</button>
+
+    <button class="additional-functionality-buttons" id="" title="Copy body array string to the clip board"><i
+            class="material-icons">file_copy</i></button>
+    <button class="additional-functionality-buttons" id="fill-button"
+            title="Fill the body with copies of added components"><i class="material-icons">control_point_duplicate</i>
+    </button>
+    <button class="additional-functionality-buttons" id="clearButton" title="Clear body components"><i
+            class="material-icons">delete_outline</i></button>
+    <h2>Cost:
+        <span id="bodyCostDiv">0</span>
+    </h2>
+    <h3 id="bodyComponentCount">(0/50)</h3>
+</div>
+
 <div id="mainContentContainer">
+
 
     <div class="centre">
 
-        <h2>Cost:
-            <span id="bodyCostDiv">0</span>
-        </h2>
-
-        <h3 id="bodyComponentCount">(0/50)</h3>
 
         <div id="progress-bar">
             <div id="progress"></div>
         </div>
 
         <div>
-            <button class="addBodyComponentButton move" value="50">MOVE</button>
-            <button class="addBodyComponentButton work" value="100">WORK</button>
-            <button class="addBodyComponentButton carry" value="50">CARRY</button>
-            <button class="addBodyComponentButton attack" value="80">ATTACK</button>
-            <button class="addBodyComponentButton ranged_attack" value="150">RANGED_ATTACK</button>
-            <button class="addBodyComponentButton heal" value="250">HEAL</button>
-            <button class="addBodyComponentButton claim" value="600">CLAIM</button>
-            <button class="addBodyComponentButton tough" value="10">TOUGH</button>
-            <button class="additional-functionality-buttons" id="clearButton" title="Clear body components"><i
-                    class="material-icons">clear</i></button>
-            <button class="additional-functionality-buttons" id="fill-button"
-                    title="Fill the body with copies of added components"><i class="material-icons">control_point_duplicate</i>
-            </button>
+
         </div>
     </div>
     <hr/>

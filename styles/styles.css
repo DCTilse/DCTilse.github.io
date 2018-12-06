@@ -1,11 +1,18 @@
+html {
+    height: 100%;
+}
+
 body {
     background-color: rgb(3, 164, 244);
     font-family: 'Viga', sans-serif;
+    margin: 0;
+    height: 100%;
 }
 
 h1 {
-
+    background: #333333;
     margin: 0;
+    color: white;
 }
 
 tr:nth-child(even) {
@@ -17,7 +24,7 @@ button {
     user-select: none;
     outline: none;
     border: none;
-    transition: all 0.5s ease;
+
 }
 
 i {
@@ -34,10 +41,14 @@ i {
     border: none;
     outline: none;
     user-select: none;
+    width: 140px;
+    margin: 2px 0;
+
 }
 
 .addBodyComponentButton:hover {
-    margin-bottom: 2px;
+    background: #656565;
+
 }
 
 .centre {
@@ -87,6 +98,7 @@ i {
 }
 
 .additional-functionality-buttons {
+    margin-top: 5px;
     border: none;
     outline: none;
     height: 40px;
@@ -95,6 +107,8 @@ i {
     -moz-border-radius: 100%;
     border-radius: 100%;
     vertical-align: middle;
+    color: white;
+    background: #333333;
 
 }
 
@@ -103,13 +117,27 @@ i {
 }
 
 /* -- IDS --*/
+#left-side-bar {
+    left: 0;
+    top: 0;
+    width: 150px;
+    height: 100%;
+    float: left;
+    background: #4b4b4b;
+}
+
+#body-percent-display {
+    width: inherit;
+    height: 150px;
+}
+
 #mainContentContainer {
     background-color: white;
     padding: 20px;
     border-radius: 20px;
     width: 1200px;
     margin: auto;
-
+    float: left;
 }
 
 #addedComponentsDiv {
@@ -157,6 +185,10 @@ i {
 
 }
 
+#clearButton {
+    background: #ff202b;
+}
+
 /* Order matters here!*/
 button:link {
 
@@ -167,7 +199,6 @@ button:visited {
 }
 
 button:hover {
-    background: rgb(194, 194, 194);
 
 }
 
