@@ -2,102 +2,386 @@
 <html lang="en">
 
 <head>
-    <title>Body Cost Calculator</title>
-    <meta charset="utf-8"/>
-    <link type="text/css" rel="stylesheet" href="styles/styles.css"/>
 
-    <script src="script/bodyCostCalcualtor.js" type="text/javascript"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <link href="https://fonts.googleapis.com/css?family=Viga" rel="stylesheet"/>
-    <!--<link rel="shortcut icon" type="image/png" href="images/favicon.png"/>-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>SB Admin 2 - Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet"/>
+    <link href="css/bodyComponentStyles.css" rel="stylesheet"/>
+
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="js/bodyCostCalcualtor.js"></script>
 </head>
 
-<body>
-<h1>
-    Body Cost Calculator
-</h1>
-<div id="left-side-bar" class="centre">
-    <canvas id="body-percent-display"></canvas>
-    <button class="addBodyComponentButton move" value="50">MOVE</button>
-    <button class="addBodyComponentButton work" value="100">WORK</button>
-    <button class="addBodyComponentButton carry" value="50">CARRY</button>
-    <button class="addBodyComponentButton attack" value="80">ATTACK</button>
-    <button class="addBodyComponentButton ranged_attack" value="150">RANGED_ATTACK</button>
-    <button class="addBodyComponentButton heal" value="250">HEAL</button>
-    <button class="addBodyComponentButton claim" value="600">CLAIM</button>
-    <button class="addBodyComponentButton tough" value="10">TOUGH</button>
+<body id="page-top">
 
-    <button class="additional-functionality-buttons" id="" title="Copy body array string to the clip board"><i
-            class="material-icons">file_copy</i></button>
-    <button class="additional-functionality-buttons" id="fill-button"
-            title="Fill the body with copies of added components"><i class="material-icons">control_point_duplicate</i>
-    </button>
-    <button class="additional-functionality-buttons" id="clearButton" title="Clear body components"><i
-            class="material-icons">delete_outline</i></button>
-    <h2>Cost:
-        <span id="bodyCostDiv">0</span>
-    </h2>
-    <h3 id="bodyComponentCount">(0/50)</h3>
-</div>
+<!-- Page Wrapper -->
+<div id="wrapper">
 
-<div id="mainContentContainer">
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-calculator"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">Body Cost Calculator</div>
+        </a>
 
-    <div class="centre">
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
 
-
-        <div id="progress-bar">
-            <div id="progress"></div>
+        <div class="sidebar-heading mt-3">
+            Body Components
         </div>
 
-        <div>
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item text-center">
+            <button class="addBodyComponentButton  btn py-3 w-100 rounded-0 shadow-none text-white" value="50">
+                <i class="fas fa-fw fa-walking move"></i>
+                MOVE
+            </button>
+        </li>
+
+        <li class="nav-item active">
+            <button class="addBodyComponentButton w-100 py-3 btn rounded-0 shadow-none text-white" value="100">
+                <i class="fas fa-fw fa-wrench work"></i>
+                WORK
+            </button>
+        </li>
+
+        <li class="nav-item active">
+            <button class="addBodyComponentButton w-100 py-3 btn rounded-0 shadow-none text-white" value="50">
+                <i class="fas fa-fw fa-people-carry carry"></i>
+                CARRY
+            </button>
+        </li>
+
+        <li class="nav-item active">
+            <button class="addBodyComponentButton w-100 py-3 btn rounded-0 shadow-none text-white" value="80">
+                <i class="fas fa-fw fa-fist-raised attack"></i>
+                ATTACK
+            </button>
+
+
+        </li>
+
+        <li class="nav-item active">
+            <button class="addBodyComponentButton w-100 overflow-hidden py-3 btn rounded-0 shadow-none text-white"
+                    value="150">
+                <i class="fas fa-fw fa-bullseye ranged_attack"></i>RANGED_ATTACK
+            </button>
+
+        </li>
+
+        <li class="nav-item active">
+            <button class="addBodyComponentButton w-100 py-3 btn rounded-0 shadow-none text-white text-white"
+                    value="250">
+                <i class="fas fa-fw fa-heartbeat heal"></i>
+                HEAL
+            </button>
+        </li>
+
+        <li class="nav-item">
+            <button class="addBodyComponentButton w-100 py-3 btn rounded-0 shadow-none text-white" value="600">
+                <i class="fas fa-fw fa-flag claim"></i>
+                CLAIM
+            </button>
+        </li>
+
+        <li class="nav-item">
+            <button class="addBodyComponentButton w-100 py-3 btn rounded-0 shadow-none text-white" value="10">
+                <i class="fas fa-fw fa-shield-alt tough"></i>
+                TOUGH
+            </button>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <h1>Screeps Body Cost Calculator</h1>
+            </nav>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+
+                <!-- Content Row -->
+                <div class="row">
+
+                    <!-- Body Cost Card -->
+                    <div class="col-xl-4 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Body Cost
+                                        </div>
+                                        <div id="bodyCostDiv" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-4 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Body
+                                            Parts
+                                        </div>
+                                        <div id="bodyComponentCount" class="h5 mb-0 font-weight-bold text-gray-800">
+                                            0/50
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-robot fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Percent full progress bar -->
+                    <div class="col-xl-4 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Percent
+                                            Full
+                                        </div>
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-auto">
+                                                <div id="percent-full-value-display"
+                                                     class="h5 mb-0 mr-3 font-weight-bold text-gray-800">0%
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="progress progress-sm mr-2">
+                                                    <div id="progress"
+                                                         class="progress-bar bg-info" role="progressbar"
+                                                         style="width: 0%" aria-valuenow="0" aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-percentage fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Removable body components, utility buttons, and array string -->
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Body Components</h6>
+                            </div>
+                            <div class="card-body">
+
+                                <!-- Utility buttons - duplicate, copy, delete -->
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="bodyBodyContainer"></div>
+                                        <div class="bodyBodyContainer"></div>
+                                        <button id="fill-button" class="btn btn-primary btn-circle btn-lg ">
+                                            <i class="fas fa-arrow-alt-circle-up"
+                                               title="Fill the body with copies of the currently added components"></i>
+                                        </button>
+
+                                        <button id="copyBodyButton" class="btn btn-success btn-circle btn-lg ">
+                                            <i class="fas fa-copy" title="Copy to clipboard"></i>
+                                        </button>
+                                        <span id="copy-success-display"></span>
+                                        <i id="copy-to-clipboard-success-icon"
+                                           class="fas fa-check fa-2x text-success d-none"
+                                           title="Copy to clipboard"></i>
+
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <button id="clearButton" class="btn btn-danger btn-circle btn-lg">
+                                            <i class="fas fa-trash" title="Clear body"></i>
+                                        </button>
+
+                                    </div>
+                                </div>
+
+                                <hr/>
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="addedComponentsDiv" id="addedComponentsDiv">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div id="bodyRecipeArray">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pie Chart -->
+                    <div class="col-xl-4 col-lg-4">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Body Composition</h6>
+
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-pie pt-4 pb-2">
+                                    <!--<canvas id="myPieChart"></canvas>-->
+                                    <canvas id="componentDisplayChart"></canvas>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Content Row -->
+
+                <div class="row">
+
+                    <!-- Area Chart -->
+                    <div class="col-xl-8 col-lg-7">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Component Effects</h6>
+
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+
+                                    <tr>
+                                        <th>Part</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                    <tr id="moveComponentCountRow">
+                                        <td>MOVE</td>
+                                        <td id="moveComponentCountCell" class="componentCountCell">0</td>
+                                    </tr>
+                                    <tr id="workComponentCountRow">
+                                        <td>WORK</td>
+                                        <td id="workComponentCountCell" class="componentCountCell">0</td>
+                                    </tr>
+                                    <tr id="carryComponentCountRow">
+                                        <td>CARRY</td>
+                                        <td id="carryComponentCountCell" class="componentCountCell">0</td>
+                                    </tr>
+                                    <tr id="attackComponentCountRow">
+                                        <td>ATTACK</td>
+                                        <td id="attackComponentCountCell" class="componentCountCell">0</td>
+                                    </tr>
+                                    <tr id="rangedAttackComponentCountRow">
+                                        <td>RANGED_ATTACK</td>
+                                        <td id="ranged_attackComponentCountCell" class="componentCountCell">0</td>
+                                    </tr>
+                                    <tr id="healComponentCountRow">
+                                        <td>HEAL</td>
+                                        <td id="healComponentCountCell" class="componentCountCell">0</td>
+                                    </tr>
+                                    <tr id="claimComponentCountRow">
+                                        <td>CLAIM</td>
+                                        <td id="claimComponentCountCell" class="componentCountCell">0</td>
+                                    </tr>
+                                    <tr id="toughComponentCountRow">
+                                        <td>TOUGH</td>
+                                        <td id="toughComponentCountCell" class="componentCountCell">0</td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
 
         </div>
-    </div>
-    <hr/>
-    <table id="componentCountTable">
-        <tr id="moveComponentCountRow">
-            <td>MOVE</td>
-            <td id="moveComponentCountCell" class="componentCountCell">0</td>
-        </tr>
-        <tr id="workComponentCountRow">
-            <td>WORK</td>
-            <td id="workComponentCountCell" class="componentCountCell">0</td>
-        </tr>
-        <tr id="carryComponentCountRow">
-            <td>CARRY</td>
-            <td id="carryComponentCountCell" class="componentCountCell">0</td>
-        </tr>
-        <tr id="attackComponentCountRow">
-            <td>ATTACK</td>
-            <td id="attackComponentCountCell" class="componentCountCell">0</td>
-        </tr>
-        <tr id="rangedAttackComponentCountRow">
-            <td>RANGED_ATTACK</td>
-            <td id="ranged_attackComponentCountCell" class="componentCountCell">0</td>
-        </tr>
-        <tr id="healComponentCountRow">
-            <td>HEAL</td>
-            <td id="healComponentCountCell" class="componentCountCell">0</td>
-        </tr>
-        <tr id="claimComponentCountRow">
-            <td>CLAIM</td>
-            <td id="claimComponentCountCell" class="componentCountCell">0</td>
-        </tr>
-        <tr id="toughComponentCountRow">
-            <td>TOUGH</td>
-            <td id="toughComponentCountCell" class="componentCountCell">0</td>
-        </tr>
-    </table>
+        <!-- End of Main Content -->
 
-    <div id="copyBodyContainer">
-        <button title="Copy the body string to the clipboard" id="copyBodyButton">Copy Body</button>
     </div>
+    <!-- End of Content Wrapper -->
 
-    <div class="addedComponentsDiv" id="addedComponentsDiv"></div>
-    <div id="bodyRecipeArray"></div>
 </div>
+<!-- End of Page Wrapper -->
+
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+
 </body>
 
 </html>

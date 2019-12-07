@@ -1,5 +1,101 @@
 (function () {
     document.onreadystatechange = function () {
+        let chart;
+        if (document.readyState === "complete") {
+            let ctx = document.getElementById("componentDisplayChart");
+            chart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [
+                        "MOVE",
+                        "WORK",
+                        "CARRY",
+                        "ATTACK",
+                        "RANGED_ATTACK",
+                        "HEAL",
+                        "CLAIM",
+                        "TOUGH"],
+                    datasets: [{
+                        data: [0, 0, 0, 0, 0, 0, 0, 0],
+                        backgroundColor: [
+                            '#a9b7c6',
+                            '#ffe56d',
+                            '#777',
+                            "#f93842",
+                            "#5d80b2",
+                            "#65fd62",
+                            "#b99cfb",
+                            "#000"
+                        ],
+                        hoverBackgroundColor: [
+                            '#a9b7c6',
+                            '#ffe56d',
+                            '#777',
+                            "#f93842",
+                            "#5d80b2",
+                            "#65fd62",
+                            "#b99cfb",
+                            "#000"
+                        ],
+                        hoverBorderColor: "rgba(234, 236, 244, 1)",
+                    }],
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    tooltips: {
+                        backgroundColor: "rgb(255,255,255)",
+                        bodyFontColor: "#858796",
+                        borderColor: '#dddfeb',
+                        borderWidth: 1,
+                        xPadding: 15,
+                        yPadding: 15,
+                        displayColors: false,
+                        caretPadding: 10,
+                    },
+                    legend: {
+                        display: false
+                    },
+                    cutoutPercentage: 80,
+                },
+            });
+        }
+
+        const bodyComponents = {
+            move: {
+                cost: 50,
+                colour: ""
+            },
+            work: {
+                cost: 100,
+                colour: ""
+            },
+            carry: {
+                cost: 50,
+                colour: ""
+            },
+            attack: {
+                cost: 80,
+                colour: ""
+            },
+            ranged_attack: {
+                cost: 150,
+                colour: ""
+            },
+            heal: {
+                cost: 250,
+                colour: ""
+            },
+            claim: {
+                cost: 600,
+                colour: ""
+            },
+            tough: {
+                cost: 10,
+                colour: ""
+            }
+        };
+
+
         const bodyArray = [];
         const bodyCosts = {
             move: 50,
@@ -14,6 +110,8 @@
         };
 
         if (document.readyState === "complete") {
+            Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+            Chart.defaults.global.defaultFontColor = '#858796';
             addEventListeners();
         }
 
@@ -37,7 +135,7 @@
                 return;
             }
 
-            bodyArray.push(e.target.innerText);
+            bodyArray.push(e.currentTarget.innerText.trim());
             update();
         }
 
@@ -156,9 +254,20 @@
                 count[value]++;
             });
 
+            // let ctx = document.getElementById("componentDisplayChart");
+
+            console.log(chart.data);
+            console.log(Object.values(count));
+
+            chart.data.datasets[0].data = Object.values(count);
+
+            chart.update();
+            chart.render();
+
             for (let e in count) {
                 document.getElementById(`${e.toLowerCase()}ComponentCountCell`).innerText = count[e];
             }
+
         }
 
         /**
@@ -167,12 +276,10 @@
         function updateProgressBar() {
             let progressBar = document.getElementById("progress");
             let percent = bodyArray.length * 2;
+            let percentFullDisplay = document.getElementById("percent-full-value-display");
             progressBar.style.width = percent + "%";
-            if (percent > 5) {
-                progressBar.innerText = `${percent}%`;
-            } else {
-                progressBar.innerText = "";
-            }
+            percentFullDisplay.innerText = percent + "%";
+
         }
 
         /**
@@ -185,13 +292,18 @@
             let recipeDiv = document.getElementById("bodyRecipeArray");
 
             if (bodyArray.length < 1) {
-                e.target.style.background = "red";
+                e.currentTarget.classList.remove("btn-success");
+                e.currentTarget.classList.add("btn-danger");
                 setTimeout(() => {
-                        e.target.style.background = "white";
+                        console.log(this);
+                        this.classList.remove("btn-danger");
+                        this.classList.add("btn-success");
+                        this.classList.remove("btn-danger");
                     },
                     500);
                 return;
             }
+
             let inp = document.createElement("input");
             inp.value = recipeDiv.innerText;
 
@@ -201,23 +313,20 @@
             document.execCommand("Copy");
 
             document.getElementsByTagName("body")[0].removeChild(inp);
+
             let tick = document.createElement("i");
-            let container = document.getElementById("copyBodyContainer");
-            tick.innerText = "done";
-            tick.classList = "material-icons successful";
+            let container = document.getElementById("copy-success-display");
+            tick.classList = "fas fa-check text-success";
             tick.id = "copy-success-tick";
+            tick.style.display = "none";
 
             container.appendChild(tick);
-            e.target.style.background = "#3ccb5c";
-
-            setTimeout(() => {
-                tick.style.color = "transparent";
-                e.target.style.background = "white";
-            }, 500);
-
-            setTimeout(() => {
-                container.removeChild(tick);
-            }, 1000);
+            $(tick).fadeIn(100, () => {
+                console.log("Complete fade in");
+                $(tick).fadeOut(1000, () => {
+                    container.removeChild(tick);
+                })
+            });
 
         }
 
